@@ -14,6 +14,8 @@ namespace Forma_Alunos
 {
     public partial class Sistema : Form
     {
+        //Teste
+
         private List<Aluno> listaAlunos = new List<Aluno>();
         private List<Livros> listaLivros = new List<Livros>();
 
@@ -343,11 +345,6 @@ namespace Forma_Alunos
             {
                 pesquisarLivro.PerformClick();
             }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            numericUpDown1.Value++;
         }
 
 
