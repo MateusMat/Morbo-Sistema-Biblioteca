@@ -26,15 +26,15 @@ namespace Forma_Alunos
 
         private void Sistema_Load(object sender, EventArgs e)
         {
-            loadAlunos();
+            loadDados();
         }
 
         private void Sistema_FormClosing(object sender, FormClosingEventArgs e)
         {
-            saveAlunos();
+            saveDados();
         }
 
-        private void saveAlunos()
+        private void saveDados()
         {
             StreamWriter sA = new StreamWriter("Alunos.txt");
 
@@ -53,7 +53,7 @@ namespace Forma_Alunos
             sL.Close();
         }
 
-        private void loadAlunos()
+        private void loadDados()
         {
             StreamReader lA = new StreamReader("Alunos.txt");
 
