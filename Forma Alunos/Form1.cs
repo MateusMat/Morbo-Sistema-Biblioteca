@@ -113,15 +113,12 @@ namespace Forma_Alunos
             {
                 e.Handled = true;
             }
-
-        }
-
-        private void textName_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            else if (e.KeyChar == (char)Keys.Enter)
             {
                 buttonCadastrarAlunos.PerformClick();
+                e.Handled = true;
             }
+
         }
 
         private void textRA_KeyPress(object sender, KeyPressEventArgs e)
@@ -130,16 +127,28 @@ namespace Forma_Alunos
             {
                 e.Handled = true;
             }
-        }
-
-        private void textRA_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            else if (e.KeyChar == (char)Keys.Enter)
             {
                 buttonCadastrarAlunos.PerformClick();
+                e.Handled = true;
             }
         }
 
+        private void DeletarAluno_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listaAlunos.Count; i++)
+            {
+                if (listaAlunos[i].ToString() == displayAlunos.SelectedItem.ToString())
+                {
+                    if(DialogResult.OK == MessageBox.Show("Tem certeza que quer deletar entrada:\nNome: " + listaAlunos[i].Nome + "\nRA: " + listaAlunos[i].RA.ToString(), "Confirmação de deleção", MessageBoxButtons.OKCancel))
+                    {
+                        listaAlunos.RemoveAt(i);
+                        updateDisplayAlunos();
+                    }
+                    break;
+                }
+            }
+        }
 
 
         //******************************//
@@ -173,13 +182,10 @@ namespace Forma_Alunos
             {
                 e.Handled = true;
             }
-        }
-
-        private void textTitulo_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            else if (e.KeyChar == (char)Keys.Enter)
             {
                 buttonCadastrarLivros.PerformClick();
+                e.Handled = true;
             }
         }
 
@@ -189,15 +195,13 @@ namespace Forma_Alunos
             {
                 e.Handled = true;
             }
-        }
-
-        private void textAutor_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            else if (e.KeyChar == (char)Keys.Enter)
             {
                 buttonCadastrarLivros.PerformClick();
+                e.Handled = true;
             }
         }
+
 
         private void textID_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -205,13 +209,28 @@ namespace Forma_Alunos
             {
                 e.Handled = true;
             }
-        }
-
-        private void textID_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            else if (e.KeyChar == (char)Keys.Enter)
             {
                 buttonCadastrarLivros.PerformClick();
+                e.Handled = true;
+            }
+        }
+
+        private void DeletarLivro_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listaLivros.Count; i++)
+            {
+                if (listaLivros[i].ToString() == displayLivros.SelectedItem.ToString())
+                {
+                    if (DialogResult.OK == MessageBox.Show("Tem certeza que quer deletar entrada:\nAutor: " + listaLivros[i].Autor +
+                                                           "\nTítulo: " + listaLivros[i].Titulo + 
+                                                           "\nID: " + listaLivros[i].ID.ToString(), "Confirmação de deleção", MessageBoxButtons.OKCancel))
+                    {
+                        listaLivros.RemoveAt(i);
+                        updateDisplayLivros();
+                    }
+                    break;
+                }
             }
         }
 
@@ -262,6 +281,7 @@ namespace Forma_Alunos
                 {
                     boxNomeAlunoSelecionado.Items.Add(listaAlunos[i].Nome);
                     boxRaAlunoSelecionado.Items.Add(listaAlunos[i].RA);
+                    break;
                 }
             }
         }
@@ -272,13 +292,10 @@ namespace Forma_Alunos
             {
                 e.Handled = true;
             }
-        }
-
-        private void textPesquisaRA_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            else if (e.KeyChar == (char)Keys.Enter)
             {
                 pesquisarAluno.PerformClick();
+                e.Handled = true;
             }
         }
 
@@ -288,15 +305,14 @@ namespace Forma_Alunos
             {
                 e.Handled = true;
             }
-        }
-
-        private void textPesquisaNome_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            else if (e.KeyChar == (char)Keys.Enter)
             {
                 pesquisarAluno.PerformClick();
+                e.Handled = true;
             }
         }
+
+
 
         //*****************//
         // Pesquisar Livro //
@@ -321,13 +337,10 @@ namespace Forma_Alunos
             {
                 e.Handled = true;
             }
-        }
-
-        private void textPesquisaAutor_KeyUp(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
+            else if (e.KeyChar == (char)Keys.Enter)
             {
                 pesquisarLivro.PerformClick();
+                e.Handled = true;
             }
         }
 
@@ -337,15 +350,13 @@ namespace Forma_Alunos
             {
                 e.Handled = true;
             }
-        }
-
-        private void textPesquisaTitulo_KeyUp(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
+            else if (e.KeyChar == (char)Keys.Enter)
             {
                 pesquisarLivro.PerformClick();
+                e.Handled = true;
             }
         }
+
 
 
 
