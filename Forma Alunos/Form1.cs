@@ -98,6 +98,18 @@ namespace Forma_Alunos
 
         private void buttonCadastrarAlunos_Click(object sender, EventArgs e)
         {
+            // impede dois alunos com o mesmo RA
+            int tempRA = Int32.Parse(textRA.Text);
+
+            for (int i = 0; i < listaAlunos.Count; i++)
+            {
+                if (listaAlunos[i].RA == tempRA)
+                {
+                    MessageBox.Show("O RA " + tempRA + " já está cadastrado", "Erro ao realizar o cadastro", MessageBoxButtons.OKCancel);
+                    return;
+                }
+            }
+            // cadastra o novo aluno
             if (textName.Text.Count() > 0 && textRA.Text.Count() > 0)
             {
                 Aluno obj = new Aluno(textName.Text, Int32.Parse(textRA.Text));
