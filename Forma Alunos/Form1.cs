@@ -14,7 +14,7 @@ namespace Forma_Alunos
 {
     public partial class Sistema : Form
     {
-        //Teste
+        private MySQL_Conector conector = new MySQL_Conector();
 
         private List<Aluno> listaAlunos = new List<Aluno>();
         private List<Livros> listaLivros = new List<Livros>();
@@ -367,6 +367,11 @@ namespace Forma_Alunos
                 pesquisarLivro.PerformClick();
                 e.Handled = true;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            conector.inserirLivro(tituloSQL.Text, autorSQL.Text, editoraSQL.Text, edicaoSQL.Text, anoSQL.Text);
         }
 
 

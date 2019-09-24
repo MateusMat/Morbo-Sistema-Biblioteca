@@ -76,6 +76,19 @@
             this.textName = new System.Windows.Forms.TextBox();
             this.textRA = new System.Windows.Forms.TextBox();
             this.tabPrograma = new System.Windows.Forms.TabControl();
+            this.sql_test = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.editoraSQL = new System.Windows.Forms.TextBox();
+            this.tituloSQL = new System.Windows.Forms.TextBox();
+            this.autorSQL = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cadastrarSQL = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.edicaoSQL = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.anoSQL = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -89,6 +102,7 @@
             this.tabCadastrarLivros.SuspendLayout();
             this.tabCadastrarAlunos.SuspendLayout();
             this.tabPrograma.SuspendLayout();
+            this.sql_test.SuspendLayout();
             this.SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -698,6 +712,7 @@
             this.tabPrograma.Controls.Add(this.tabCadastrarAlunos);
             this.tabPrograma.Controls.Add(this.tabCadastrarLivros);
             this.tabPrograma.Controls.Add(this.tabPage1);
+            this.tabPrograma.Controls.Add(this.sql_test);
             this.tabPrograma.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPrograma.HotTrack = true;
             this.tabPrograma.ItemSize = new System.Drawing.Size(200, 21);
@@ -709,6 +724,171 @@
             this.tabPrograma.Size = new System.Drawing.Size(1264, 657);
             this.tabPrograma.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabPrograma.TabIndex = 6;
+            // 
+            // sql_test
+            // 
+            this.sql_test.Controls.Add(this.anoSQL);
+            this.sql_test.Controls.Add(this.edicaoSQL);
+            this.sql_test.Controls.Add(this.editoraSQL);
+            this.sql_test.Controls.Add(this.label15);
+            this.sql_test.Controls.Add(this.label14);
+            this.sql_test.Controls.Add(this.label11);
+            this.sql_test.Controls.Add(this.tituloSQL);
+            this.sql_test.Controls.Add(this.autorSQL);
+            this.sql_test.Controls.Add(this.label12);
+            this.sql_test.Controls.Add(this.listBox1);
+            this.sql_test.Controls.Add(this.label13);
+            this.sql_test.Controls.Add(this.cadastrarSQL);
+            this.sql_test.Location = new System.Drawing.Point(4, 25);
+            this.sql_test.Name = "sql_test";
+            this.sql_test.Padding = new System.Windows.Forms.Padding(3);
+            this.sql_test.Size = new System.Drawing.Size(1256, 628);
+            this.sql_test.TabIndex = 4;
+            this.sql_test.Text = "SQL Autor Teste";
+            this.sql_test.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(3, 72);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(97, 25);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "Editora:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // editoraSQL
+            // 
+            this.editoraSQL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.editoraSQL.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editoraSQL.Location = new System.Drawing.Point(96, 72);
+            this.editoraSQL.Margin = new System.Windows.Forms.Padding(4);
+            this.editoraSQL.Name = "editoraSQL";
+            this.editoraSQL.Size = new System.Drawing.Size(931, 27);
+            this.editoraSQL.TabIndex = 17;
+            // 
+            // tituloSQL
+            // 
+            this.tituloSQL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tituloSQL.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tituloSQL.Location = new System.Drawing.Point(96, 8);
+            this.tituloSQL.Margin = new System.Windows.Forms.Padding(4);
+            this.tituloSQL.Name = "tituloSQL";
+            this.tituloSQL.Size = new System.Drawing.Size(931, 27);
+            this.tituloSQL.TabIndex = 15;
+            // 
+            // autorSQL
+            // 
+            this.autorSQL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.autorSQL.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autorSQL.Location = new System.Drawing.Point(96, 40);
+            this.autorSQL.Margin = new System.Windows.Forms.Padding(4);
+            this.autorSQL.Name = "autorSQL";
+            this.autorSQL.Size = new System.Drawing.Size(931, 27);
+            this.autorSQL.TabIndex = 16;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(16, 8);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(81, 25);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Titulo:";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // listBox1
+            // 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 18;
+            this.listBox1.Location = new System.Drawing.Point(96, 184);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(931, 328);
+            this.listBox1.TabIndex = 20;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(19, 40);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(79, 25);
+            this.label13.TabIndex = 14;
+            this.label13.Text = "Autor:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cadastrarSQL
+            // 
+            this.cadastrarSQL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cadastrarSQL.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cadastrarSQL.Location = new System.Drawing.Point(96, 136);
+            this.cadastrarSQL.Margin = new System.Windows.Forms.Padding(4);
+            this.cadastrarSQL.Name = "cadastrarSQL";
+            this.cadastrarSQL.Size = new System.Drawing.Size(931, 39);
+            this.cadastrarSQL.TabIndex = 18;
+            this.cadastrarSQL.Text = "Cadastrar";
+            this.cadastrarSQL.UseVisualStyleBackColor = true;
+            this.cadastrarSQL.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(11, 104);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(91, 25);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Edição:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // edicaoSQL
+            // 
+            this.edicaoSQL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edicaoSQL.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.edicaoSQL.Location = new System.Drawing.Point(96, 104);
+            this.edicaoSQL.Margin = new System.Windows.Forms.Padding(4);
+            this.edicaoSQL.Name = "edicaoSQL";
+            this.edicaoSQL.Size = new System.Drawing.Size(395, 27);
+            this.edicaoSQL.TabIndex = 21;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(576, 104);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(62, 25);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "Ano:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // anoSQL
+            // 
+            this.anoSQL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.anoSQL.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.anoSQL.Location = new System.Drawing.Point(632, 104);
+            this.anoSQL.Margin = new System.Windows.Forms.Padding(4);
+            this.anoSQL.Name = "anoSQL";
+            this.anoSQL.Size = new System.Drawing.Size(395, 27);
+            this.anoSQL.TabIndex = 23;
             // 
             // Sistema
             // 
@@ -742,6 +922,8 @@
             this.tabCadastrarAlunos.ResumeLayout(false);
             this.tabCadastrarAlunos.PerformLayout();
             this.tabPrograma.ResumeLayout(false);
+            this.sql_test.ResumeLayout(false);
+            this.sql_test.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -796,6 +978,19 @@
         private System.Windows.Forms.TextBox textName;
         private System.Windows.Forms.TextBox textRA;
         private System.Windows.Forms.TabControl tabPrograma;
+        private System.Windows.Forms.TabPage sql_test;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox editoraSQL;
+        private System.Windows.Forms.TextBox tituloSQL;
+        private System.Windows.Forms.TextBox autorSQL;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button cadastrarSQL;
+        private System.Windows.Forms.TextBox anoSQL;
+        private System.Windows.Forms.TextBox edicaoSQL;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
     }
 }
 
