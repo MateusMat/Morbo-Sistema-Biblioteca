@@ -29,7 +29,7 @@ namespace Forma_Alunos
             server = "localhost";
             database = "biblioteca";
             uid = "root";
-            password = "";
+            password = "admin";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";

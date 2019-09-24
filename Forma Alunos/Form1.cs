@@ -369,16 +369,23 @@ namespace Forma_Alunos
             }
         }
 
+
+
+        //*********************//
+        // Cadastrar Livro SQL //
+        //*********************//
+
         private void button2_Click(object sender, EventArgs e)
         {
             conector.inserirLivro(tituloSQL.Text, autorSQL.Text, editoraSQL.Text, edicaoSQL.Text, anoSQL.Text);
         }
 
+        private void updateDislay_LivrosSQL()
+        {
+            listaLivrosSQL.Items.Clear();
 
 
-
-        //*******************//
-
+        }
 
     }
 }
