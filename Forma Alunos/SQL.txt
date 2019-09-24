@@ -1,109 +1,14 @@
-﻿-- MySQL Workbench Forward Engineering
+﻿CREATE DEFINER=`root`@`localhost` FUNCTION `inserir_Livro`(`in_titulo` VARCHAR(100), `in_autor` VARCHAR(100), `in_editora` VARCHAR(50),
+								 `in_edicao` INT, `in_ano` YEAR) RETURNS int(11)
+BEGIN
+	IF ( exists(select * from `autor` where `nome` = `in_autor`)) = 0
+		THEN INSERT INTO `autor`(`nome`) VALUES (`in_autor`);
+	END IF;
+	IF ( exists(select * from `editora` where `nome` = `in_editora`)) = 0
+		THEN INSERT INTO `editora`(`nome`) VALUES (`in_editora`);
+	END IF;
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+    INSERT INTO `livro`(`título`, `idAutor`, `idEditora`, `edição`, `ano`)VALUES (`in_titulo`, (select `idAutor` from `autor` where `nome` = `in_autor`), (select `idEditora` from `editora` where `nome` = `in_editora`), `in_edicao`, `in_ano`);
 
--- -----------------------------------------------------
--- Schema biblioteca
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema biblioteca
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `biblioteca` DEFAULT CHARACTER SET utf8 ;
-USE `biblioteca` ;
-
--- -----------------------------------------------------
--- Table `biblioteca`.`Autor`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`Autor` (
-  `idAutor` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(100) NOT NULL,
-  `ultima_atualizacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idAutor`),
-  UNIQUE INDEX `idAutor_UNIQUE` (`idAutor` ASC),
-  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `biblioteca`.`Editora`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`Editora` (
-  `idEditora` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(50) NOT NULL,
-  `ultima_atualizacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idEditora`),
-  UNIQUE INDEX `idEditora_UNIQUE` (`idEditora` ASC),
-  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `biblioteca`.`Livro`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`Livro` (
-  `idLivro` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `título` VARCHAR(100) NOT NULL,
-  `idAutor` INT ZEROFILL UNSIGNED NOT NULL,
-  `idEditora` INT UNSIGNED NOT NULL,
-  `edição` DECIMAL UNSIGNED NULL,
-  `ano` YEAR NULL,
-  `ultima_atualizacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idLivro`),
-  UNIQUE INDEX `idLivro_UNIQUE` (`idLivro` ASC),
-  INDEX `fk_Livro_Autor1_idx` (`idAutor` ASC),
-  INDEX `fk_Livro_Editora1_idx` (`idEditora` ASC),
-  CONSTRAINT `fk_Livro_Autor1`
-    FOREIGN KEY (`idAutor`)
-    REFERENCES `biblioteca`.`Autor` (`idAutor`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Livro_Editora1`
-    FOREIGN KEY (`idEditora`)
-    REFERENCES `biblioteca`.`Editora` (`idEditora`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `biblioteca`.`Assunto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`Assunto` (
-  `idAssunto` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `assunto` VARCHAR(50) NOT NULL,
-  `ultima_atualizacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idAssunto`),
-  UNIQUE INDEX `assunto_UNIQUE` (`assunto` ASC),
-  UNIQUE INDEX `idAssunto_UNIQUE` (`idAssunto` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `biblioteca`.`Assuntos_do_Livro`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `biblioteca`.`Assuntos_do_Livro` (
-  `idLivro` INT UNSIGNED NOT NULL,
-  `idAssunto` INT UNSIGNED NOT NULL,
-  `ultima_atualizacao` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  INDEX `fk_Livro_has_Assunto_Assunto1_idx` (`idAssunto` ASC),
-  INDEX `fk_Livro_has_Assunto_Livro1_idx` (`idLivro` ASC),
-  PRIMARY KEY (`idLivro`, `idAssunto`),
-  CONSTRAINT `fk_Livro_has_Assunto_Livro1`
-    FOREIGN KEY (`idLivro`)
-    REFERENCES `biblioteca`.`Livro` (`idLivro`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Livro_has_Assunto_Assunto1`
-    FOREIGN KEY (`idAssunto`)
-    REFERENCES `biblioteca`.`Assunto` (`idAssunto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+RETURN 1;
+END
