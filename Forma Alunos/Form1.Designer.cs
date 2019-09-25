@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Sistema));
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,9 +87,11 @@
             this.tituloSQL = new System.Windows.Forms.TextBox();
             this.autorSQL = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.listaLivrosSQL = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.label13 = new System.Windows.Forms.Label();
             this.cadastrarSQL = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cadastrarAluno1 = new Forma_Alunos.CadastrarAluno();
             this.menuStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -103,6 +106,7 @@
             this.tabCadastrarAlunos.SuspendLayout();
             this.tabPrograma.SuspendLayout();
             this.sql_test.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -713,6 +717,7 @@
             this.tabPrograma.Controls.Add(this.tabCadastrarLivros);
             this.tabPrograma.Controls.Add(this.tabPage1);
             this.tabPrograma.Controls.Add(this.sql_test);
+            this.tabPrograma.Controls.Add(this.tabPage2);
             this.tabPrograma.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPrograma.HotTrack = true;
             this.tabPrograma.ItemSize = new System.Drawing.Size(200, 21);
@@ -736,7 +741,7 @@
             this.sql_test.Controls.Add(this.tituloSQL);
             this.sql_test.Controls.Add(this.autorSQL);
             this.sql_test.Controls.Add(this.label12);
-            this.sql_test.Controls.Add(this.listaLivrosSQL);
+            this.sql_test.Controls.Add(this.listBox1);
             this.sql_test.Controls.Add(this.label13);
             this.sql_test.Controls.Add(this.cadastrarSQL);
             this.sql_test.Location = new System.Drawing.Point(4, 25);
@@ -850,19 +855,19 @@
             this.label12.Text = "Titulo:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // listaLivrosSQL
+            // listBox1
             // 
-            this.listaLivrosSQL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listaLivrosSQL.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listaLivrosSQL.FormattingEnabled = true;
-            this.listaLivrosSQL.ItemHeight = 18;
-            this.listaLivrosSQL.Location = new System.Drawing.Point(96, 184);
-            this.listaLivrosSQL.Margin = new System.Windows.Forms.Padding(4);
-            this.listaLivrosSQL.Name = "listaLivrosSQL";
-            this.listaLivrosSQL.Size = new System.Drawing.Size(931, 328);
-            this.listaLivrosSQL.TabIndex = 20;
+            this.listBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 18;
+            this.listBox1.Location = new System.Drawing.Point(96, 184);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(931, 328);
+            this.listBox1.TabIndex = 20;
             // 
             // label13
             // 
@@ -890,6 +895,25 @@
             this.cadastrarSQL.UseVisualStyleBackColor = true;
             this.cadastrarSQL.Click += new System.EventHandler(this.button2_Click);
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.cadastrarAluno1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1256, 628);
+            this.tabPage2.TabIndex = 5;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // cadastrarAluno1
+            // 
+            this.cadastrarAluno1.Location = new System.Drawing.Point(0, 0);
+            this.cadastrarAluno1.Margin = new System.Windows.Forms.Padding(4);
+            this.cadastrarAluno1.Name = "cadastrarAluno1";
+            this.cadastrarAluno1.Size = new System.Drawing.Size(1064, 657);
+            this.cadastrarAluno1.TabIndex = 0;
+            // 
             // Sistema
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -898,9 +922,10 @@
             this.Controls.Add(this.tabPrograma);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Sistema";
-            this.Text = "Sistema";
+            this.Text = "Sistema Biblioteca";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Sistema_FormClosing);
             this.Load += new System.EventHandler(this.Sistema_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -924,6 +949,7 @@
             this.tabPrograma.ResumeLayout(false);
             this.sql_test.ResumeLayout(false);
             this.sql_test.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -971,12 +997,6 @@
         private System.Windows.Forms.Button buttonCadastrarLivros;
         private System.Windows.Forms.TabPage tabCadastrarAlunos;
         private System.Windows.Forms.Button DeletarAluno;
-        private System.Windows.Forms.Label labelNome;
-        private System.Windows.Forms.ListBox displayAlunos;
-        private System.Windows.Forms.Label labelRA;
-        private System.Windows.Forms.Button buttonCadastrarAlunos;
-        private System.Windows.Forms.TextBox textName;
-        private System.Windows.Forms.TextBox textRA;
         private System.Windows.Forms.TabControl tabPrograma;
         private System.Windows.Forms.TabPage sql_test;
         private System.Windows.Forms.Label label11;
@@ -984,13 +1004,21 @@
         private System.Windows.Forms.TextBox tituloSQL;
         private System.Windows.Forms.TextBox autorSQL;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ListBox listaLivrosSQL;
+        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button cadastrarSQL;
         private System.Windows.Forms.TextBox anoSQL;
         private System.Windows.Forms.TextBox edicaoSQL;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label labelNome;
+        private System.Windows.Forms.ListBox displayAlunos;
+        private System.Windows.Forms.Label labelRA;
+        private System.Windows.Forms.Button buttonCadastrarAlunos;
+        private System.Windows.Forms.TextBox textName;
+        private System.Windows.Forms.TextBox textRA;
+        private System.Windows.Forms.TabPage tabPage2;
+        private CadastrarAluno cadastrarAluno1;
     }
 }
 

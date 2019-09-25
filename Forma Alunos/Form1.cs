@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Forma_Alunos
 {
@@ -382,10 +383,9 @@ namespace Forma_Alunos
 
         private void updateDislay_LivrosSQL()
         {
-            listaLivrosSQL.Items.Clear();
+            listBox1.Items.Clear();
 
 
         }
-
     }
 }
