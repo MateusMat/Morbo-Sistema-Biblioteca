@@ -59,12 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aluno.cs" />
-    <Compile Include="CadastrarAluno.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CadastrarAluno.Designer.cs">
-      <DependentUpon>CadastrarAluno.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,9 +69,12 @@
     <Compile Include="MySQL_Conector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CadastrarAluno.resx">
-      <DependentUpon>CadastrarAluno.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Cadastro-Pesquisa_Livros.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cadastro-Pesquisa_Livros.Designer.cs">
+      <DependentUpon>Cadastro-Pesquisa_Livros.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -91,6 +88,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Cadastro-Pesquisa_Livros.resx">
+      <DependentUpon>Cadastro-Pesquisa_Livros.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Livraria.mwb" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

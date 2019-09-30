@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Forma_Alunos
 {
@@ -111,10 +112,56 @@ namespace Forma_Alunos
         {
         }
 
-        ////Select statement
-        //public List<string>[] Select()
-        //{
-        //}
+        public List<Livros> Pesquisa_Livro(string busca, int tipo)
+        {
+            string comando = "SELECT livro.idLivro, livro.titulo, autor.nome as autorNome, editora.nome as editoraNome, livro.edicao, livro.ano FROM livro " +
+							 "INNER JOIN autor ON (livro.idAutor = autor.idAutor) INNER JOIN editora ON (livro.idEditora = editora.idEditora) ";
+
+            switch (tipo)
+            {
+                case 0:
+                    comando +=	"WHERE livro.titulo LIKE '%" + busca + "%'";
+					break;
+				case 1:
+					comando +=	"WHERE livro.idAutor IN (SELECT autor.idAutor FROM autor WHERE nome LIKE '%" + busca + "%')";
+					break;
+				case 2:
+					comando += "WHERE livro.idEditora IN (SELECT editora.idEditora FROM editora WHERE nome LIKE '%" + busca + "%')";
+					break;
+				case 3:
+					comando += "WHERE (livro.titulo LIKE '%" + busca + "%' OR livro.idAutor IN (SELECT autor.idAutor FROM autor WHERE nome LIKE '%" + busca + "%') OR livro.idEditora IN (SELECT editora.idEditora FROM editora WHERE nome LIKE '%" + busca + "%'))";
+					break;
+				default:
+					return null;
+            }
+            
+            //Create a list to store the result
+            List<Livros> lista = new List<Livros> ();
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(comando, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+				//MessageBox.Show (dataReader. .ToString());
+
+                while (dataReader.Read())
+                {
+                    lista.Add(new Livros("" + dataReader["idLivro"], "" + dataReader["titulo"], "" + dataReader["autorNome"], "" + dataReader["editoraNome"], "" + dataReader["edicao"], "" + dataReader["ano"]));
+                }
+
+                    //close Data Reader
+                    dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+            }
+
+			return lista;
+		}
 
         ////Count statement
         //public int Count()

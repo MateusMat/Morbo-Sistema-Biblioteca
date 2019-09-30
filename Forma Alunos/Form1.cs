@@ -18,11 +18,13 @@ namespace Forma_Alunos
         private MySQL_Conector conector = new MySQL_Conector();
 
         private List<Aluno> listaAlunos = new List<Aluno>();
-        private List<Livros> listaLivros = new List<Livros>();
+
+        private List<Livros> listaLivroSQL = null;
 
         public Sistema()
         {
             InitializeComponent();
+			modoPesquisaSQL.SelectedIndex = 0;
         }
 
         private void Sistema_Load(object sender, EventArgs e)
@@ -44,14 +46,6 @@ namespace Forma_Alunos
                 sA.WriteLine(listaAlunos[i]);
             }
             sA.Close();
-
-            StreamWriter sL = new StreamWriter("Livros.txt");
-
-            for (int i = 0; i < listaLivros.Count; i++)
-            {
-                sL.WriteLine(listaLivros[i]);
-            }
-            sL.Close();
         }
 
         private void loadDados()
@@ -67,18 +61,6 @@ namespace Forma_Alunos
             }
             updateDisplayAlunos();
             lA.Close();
-
-            StreamReader lL = new StreamReader("Livros.txt");
-
-            while (!lL.EndOfStream)
-            {
-                string temp = lL.ReadLine();
-                Livros obj = new Livros(temp.Substring(0, temp.IndexOf(',')) , temp.Substring(temp.IndexOf(',') + 2, temp.IndexOf('-') - temp.IndexOf(',') - 3) , temp.Substring(temp.IndexOf('-') + 2));
-
-                listaLivros.Add(obj);
-            }
-            updateDisplayLivros();
-            lL.Close();
         }
 
 
@@ -164,91 +146,6 @@ namespace Forma_Alunos
         }
 
 
-        //******************************//
-        // Referente a Cadastrar Livros //
-        //******************************//
-
-        private void updateDisplayLivros()
-        {
-            displayLivros.Items.Clear();
-
-            for (int i = 0; i < listaLivros.Count; i++)
-            {
-                displayLivros.Items.Add(listaLivros[i]);
-            }
-        }
-
-        private void buttonCadastrarLivros_Click(object sender, EventArgs e)
-        {
-            if (textTitulo.Text.Count() > 0 && textAutor.Text.Count() > 0)
-            {
-                Livros obj = new Livros(textTitulo.Text, textAutor.Text, textID.Text);
-
-                listaLivros.Add(obj);
-                updateDisplayLivros();
-            }
-        }
-
-        private void textTitulo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!(e.KeyChar.ToString().All(char.IsLetter) || e.KeyChar.ToString().All(char.IsSeparator) || e.KeyChar.ToString().All(char.IsControl)))
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == (char)Keys.Enter)
-            {
-                buttonCadastrarLivros.PerformClick();
-                e.Handled = true;
-            }
-        }
-
-        private void textAutor_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!(e.KeyChar.ToString().All(char.IsLetter) || e.KeyChar.ToString().All(char.IsSeparator) || e.KeyChar.ToString().All(char.IsControl)))
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == (char)Keys.Enter)
-            {
-                buttonCadastrarLivros.PerformClick();
-                e.Handled = true;
-            }
-        }
-
-
-        private void textID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!(e.KeyChar.ToString().All(char.IsDigit) || e.KeyChar.ToString().All(char.IsControl)))
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == (char)Keys.Enter)
-            {
-                buttonCadastrarLivros.PerformClick();
-                e.Handled = true;
-            }
-        }
-
-        private void DeletarLivro_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < listaLivros.Count; i++)
-            {
-                if (listaLivros[i].ToString() == displayLivros.SelectedItem.ToString())
-                {
-                    if (DialogResult.OK == MessageBox.Show("Tem certeza que quer deletar entrada:\nAutor: " + listaLivros[i].Autor +
-                                                           "\nTítulo: " + listaLivros[i].Titulo + 
-                                                           "\nID: " + listaLivros[i].ID.ToString(), "Confirmação de deleção", MessageBoxButtons.OKCancel))
-                    {
-                        listaLivros.RemoveAt(i);
-                        updateDisplayLivros();
-                    }
-                    break;
-                }
-            }
-        }
-
-
-
         //*****************//
         // Pesquisar Aluno //
         //*****************//
@@ -326,66 +223,44 @@ namespace Forma_Alunos
         }
 
 
-
-        //*****************//
-        // Pesquisar Livro //
-        //*****************//
-
-        private void pesquisarLivro_Click(object sender, EventArgs e)
-        {
-            displayPesquisaLivro.Items.Clear();
-
-            for (int i = 0; i < listaLivros.Count; i++)
-            {
-                if (listaLivros[i].Autor.Contains(textPesquisaAutor.Text) && listaLivros[i].Titulo.Contains(textPesquisaTitulo.Text))
-                {
-                    displayPesquisaLivro.Items.Add(listaLivros[i]);
-                }
-            }
-        }
-
-        private void textPesquisaAutor_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!(e.KeyChar.ToString().All(char.IsLetter) || e.KeyChar.ToString().All(char.IsSeparator) || e.KeyChar.ToString().All(char.IsControl)))
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == (char)Keys.Enter)
-            {
-                pesquisarLivro.PerformClick();
-                e.Handled = true;
-            }
-        }
-
-        private void textPesquisaTitulo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!(e.KeyChar.ToString().All(char.IsLetter) || e.KeyChar.ToString().All(char.IsSeparator) || e.KeyChar.ToString().All(char.IsControl)))
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == (char)Keys.Enter)
-            {
-                pesquisarLivro.PerformClick();
-                e.Handled = true;
-            }
-        }
-
-
-
         //*********************//
-        // Cadastrar Livro SQL //
+        //      Livro SQL      //
         //*********************//
 
-        private void button2_Click(object sender, EventArgs e)
+        private void botaoCadastrarSQL_Click(object sender, EventArgs e)
         {
-            conector.inserirLivro(tituloSQL.Text, autorSQL.Text, editoraSQL.Text, edicaoSQL.Text, anoSQL.Text);
-        }
+			if ( DialogResult.OK == MessageBox.Show ("Tem certeza que quer cadastrar o Livro:\nTítulo: " + tituloSQL.Text +
+														"\nAutor: " + autorSQL.Text +
+														"\nEditora: " + editoraSQL.Text +
+														"\nEdição: " + edicaoSQL.Text +
+														"\nAno: " + anoSQL.Text, "Confirmar dados do Livro", MessageBoxButtons.OKCancel) )
+			{
+				conector.inserirLivro (tituloSQL.Text.ToLower (), autorSQL.Text.ToLower (), editoraSQL.Text.ToLower (), edicaoSQL.Text.ToLower (), anoSQL.Text.ToLower ());
+				tituloSQL.Clear ();
+				autorSQL.Clear ();
+				editoraSQL.Clear ();
+				edicaoSQL.Clear ();
+				anoSQL.Clear ();
+			}
+		}
 
         private void updateDislay_LivrosSQL()
         {
-            listBox1.Items.Clear();
+            Display_LivrosSQL.Items.Clear();
 
-
+            if(listaLivroSQL != null)
+            {
+                for (int i = 0; i < listaLivroSQL.Count(); i++)
+                    Display_LivrosSQL.Items.Add(listaLivroSQL[i].ToString());
+            }
         }
-    }
+
+        private void botaoPesquisarSQL_Click(object sender, EventArgs e)
+        {
+			
+
+            listaLivroSQL = conector.Pesquisa_Livro(pesquisaLivroSQL.Text.ToLower(), modoPesquisaSQL.SelectedIndex);
+            updateDislay_LivrosSQL();
+        }
+	}
 }
