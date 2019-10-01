@@ -131,17 +131,24 @@ namespace Forma_Alunos
 
         private void DeletarAluno_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listaAlunos.Count; i++)
+            try
             {
-                if (listaAlunos[i].ToString() == displayAlunos.SelectedItem.ToString())
+                for (int i = 0; i < listaAlunos.Count; i++)
                 {
-                    if(DialogResult.OK == MessageBox.Show("Tem certeza que quer deletar entrada:\nNome: " + listaAlunos[i].Nome + "\nRA: " + listaAlunos[i].RA.ToString(), "Confirmação de deleção", MessageBoxButtons.OKCancel))
+                    if (listaAlunos[i].ToString() == displayAlunos.SelectedItem.ToString())
                     {
-                        listaAlunos.RemoveAt(i);
-                        updateDisplayAlunos();
+                        if (DialogResult.OK == MessageBox.Show("Tem certeza que quer deletar entrada:\nNome: " + listaAlunos[i].Nome + "\nRA: " + listaAlunos[i].RA.ToString(), "Confirmação de deleção", MessageBoxButtons.OKCancel))
+                        {
+                            listaAlunos.RemoveAt(i);
+                            updateDisplayAlunos();
+                        }
+                        break;
                     }
-                    break;
                 }
+            }
+            catch (System.NullReferenceException)
+            {
+                MessageBox.Show("Selecione um elemento para remover", "Erro ao remover", MessageBoxButtons.OK);
             }
         }
 
