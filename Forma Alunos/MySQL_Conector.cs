@@ -10,8 +10,10 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace Forma_Alunos
 {
-    class MySQL_Conector
+    public class MySQL_Conector
     {
+		private static readonly MySQL_Conector instance = new MySQL_Conector();
+
         private MySqlConnection connection;
         private string server;
         private string database;
@@ -19,13 +21,25 @@ namespace Forma_Alunos
         private string password;
 
         //Constructor
-        public MySQL_Conector()
+        static MySQL_Conector()
         {
-            Initialize();
         }
 
-        //Initialize values
-        private void Initialize()
+		private MySQL_Conector()
+		{
+			Initialize ();
+		}
+
+		public static MySQL_Conector Instance
+		{
+			get
+			{
+				return instance;
+			}
+		}
+
+		//Initialize values
+		private void Initialize()
         {
             server = "localhost";
             database = "biblioteca";
@@ -82,7 +96,6 @@ namespace Forma_Alunos
             }
         }
 
-        //Insert statement
         public void inserirLivro(string titulo, string autor, string editora, string edicao, string ano)
         {
             string query = "select biblioteca.inserir_Livro('" + titulo + "', '"
@@ -102,19 +115,83 @@ namespace Forma_Alunos
             }
         }
 
-        //Update statement
-        public void Update()
-        {
-        }
+		public string inserirLivroNovo(string ISBN, string titulo, string autor, string editora, string idioma, string edicao, string ano )
+		{
+			string codigo = "";
 
-        //Delete statement
-        public void Delete()
-        {
-        }
+			Random rnd = new Random ();
+
+			for ( int i = 0; i < 4; i++ )
+			{
+				int temp = rnd.Next (65, 90);
+				codigo += (char) temp;
+			}
+
+			string comando = "select biblioteca.inserir_Livro(" + ISBN + ", '" + codigo + " 001', '" + titulo + "', '"
+							+ autor + "', '" + editora + "', '" + idioma + "', " + edicao + ", " + ano + ")";
+
+			//open connection
+			if ( this.OpenConnection () == true )
+			{
+				//create command and assign the query and connection from the constructor
+				MySqlCommand cmd = new MySqlCommand (comando, connection);
+
+				//Execute command
+				cmd.ExecuteNonQuery ();
+
+				//close connection
+				this.CloseConnection ();
+			}
+
+			return codigo;
+		}
+
+		public void inserirLivroExistente (string ISBN, string codigo, int quantia)
+		{
+			string comando = "SELECT COUNT(*) FROM biblioteca.livro_objeto WHERE idlivro LIKE '" + codigo + "%';";
+
+			int count = new int();
+
+			MySqlCommand cmd;
+
+			if ( this.OpenConnection () == true )
+			{
+				cmd = new MySqlCommand (comando, connection);
+				MySqlDataReader dataReader = cmd.ExecuteReader ();
+				dataReader.Read ();
+				count = Int32.Parse (dataReader["COUNT(*)"].ToString ()) + 1;
+				this.CloseConnection ();
+			}
+
+			if ( this.OpenConnection () == true )
+			{
+				for ( int i = count; i < quantia + count; i++ )
+				{
+					comando = "INSERT INTO livro_objeto(idLivro, isbn) values ('" + codigo + " " + i.ToString("D3") + "', '" + ISBN + "')";
+					cmd = new MySqlCommand (comando, connection);
+					cmd.ExecuteNonQuery ();
+				}
+			this.CloseConnection ();
+			}
+		}
+
+		public void cadastrarUsuario (string nome, string email, string cpf, string endereco)
+		{
+			string comando = "INSERT INTO usuario(nome, email, CPF, endereco) VALUES ('" + nome + "', '" + email + "', '" + cpf +"', '" + endereco +"' )";
+
+			if ( this.OpenConnection () == true )
+			{
+				MySqlCommand cmd = new MySqlCommand (comando, connection);
+				cmd.ExecuteNonQuery ();
+				this.CloseConnection ();
+			}
+		}
+
+
 
         public List<Livros> Pesquisa_Livro(string busca, int tipo)
         {
-            string comando = "SELECT livro.idLivro, livro.titulo, autor.nome as autorNome, editora.nome as editoraNome, livro.edicao, livro.ano FROM livro " +
+            string comando = "SELECT ISBN, titulo, autor.nome as autorNome, editora.nome as editoraNome, idioma, edicao, ano , descricao FROM livro " +
 							 "INNER JOIN autor ON (livro.idAutor = autor.idAutor) INNER JOIN editora ON (livro.idEditora = editora.idEditora) ";
 
             switch (tipo)
@@ -126,10 +203,10 @@ namespace Forma_Alunos
 					comando +=	"WHERE livro.idAutor IN (SELECT autor.idAutor FROM autor WHERE nome LIKE '%" + busca + "%')";
 					break;
 				case 2:
-					comando += "WHERE livro.idEditora IN (SELECT editora.idEditora FROM editora WHERE nome LIKE '%" + busca + "%')";
+					comando += "WHERE livro.ISBN LIKE '"+ busca + "'";
 					break;
 				case 3:
-					comando += "WHERE (livro.titulo LIKE '%" + busca + "%' OR livro.idAutor IN (SELECT autor.idAutor FROM autor WHERE nome LIKE '%" + busca + "%') OR livro.idEditora IN (SELECT editora.idEditora FROM editora WHERE nome LIKE '%" + busca + "%'))";
+					comando += "WHERE (livro.titulo LIKE '%" + busca + "%' OR livro.idAutor IN (SELECT autor.idAutor FROM autor WHERE nome LIKE '%" + busca + "%') OR livro.ISBN LIKE '" + busca + "')";
 					break;
 				default:
 					return null;
@@ -146,11 +223,17 @@ namespace Forma_Alunos
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
-				//MessageBox.Show (dataReader. .ToString());
 
                 while (dataReader.Read())
                 {
-                    lista.Add(new Livros("" + dataReader["idLivro"], "" + dataReader["titulo"], "" + dataReader["autorNome"], "" + dataReader["editoraNome"], "" + dataReader["edicao"], "" + dataReader["ano"]));
+                    lista.Add(new Livros("" + dataReader["ISBN"],
+										 "" + dataReader["titulo"],
+										 "" + dataReader["autorNome"],
+										 "" + dataReader["editoraNome"],
+										 "" + dataReader["idioma"],
+										 "" + dataReader["edicao"],
+										 "" + dataReader["ano"],
+										 "" + dataReader["descricao"]));
                 }
 
                     //close Data Reader
@@ -162,20 +245,5 @@ namespace Forma_Alunos
 
 			return lista;
 		}
-
-        ////Count statement
-        //public int Count()
-        //{
-        //}
-
-        //Backup
-        public void Backup()
-        {
-        }
-
-        //Restore
-        public void Restore()
-        {
-        }
     }
 }

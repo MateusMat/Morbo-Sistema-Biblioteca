@@ -7,41 +7,37 @@ using System.Globalization;
 
 namespace Forma_Alunos
 {
-    class Livros
+    public class Livros
     {
-        public string ID { set; get; }
+        public string ISBN { set; get; }
         public string Titulo { set; get; }
         public string Autor { set; get; }
         public string Editora { set; get; }
-        public string Edicao { set; get; }
+		public string Idioma { set; get; }
+		public string Edicao { set; get; }
 		public string Ano { set; get; }
+		public string Descricao { set; get; }
 
-		public Livros()
-        {
-            ID = "";
-            Titulo = "";
-            Autor = "";
-            Editora = "";
-			Edicao = "";
-            Ano = "";
-        }
+		public Livros( string isbn, string titulo, string autor, string editora, string edicao, string ano )
+		{
+			ISBN = isbn;
+			Titulo = ToTitleCase (titulo);
+			Autor = ToTitleCase (autor);
+			Editora = ToTitleCase (editora);
+			Edicao = edicao;
+			Ano = ano;
+		}
 
-        public Livros(string id, string titulo, string autor)
+		public Livros(string isbn, string titulo, string autor, string editora, string idioma, string edicao, string ano, string descricao)
         {
-            ID = id;
-            Titulo = titulo;
-            Autor = autor;
-            
-        }
-
-        public Livros(string id, string titulo, string autor, string editora, string edicao, string ano)
-        {
-            ID = id;
+            ISBN = isbn;
             Titulo = ToTitleCase(titulo);
             Autor = ToTitleCase (autor);
             Editora = ToTitleCase (editora);
+			Idioma = ToTitleCase (idioma);
 			Edicao = edicao;
             Ano = ano;
+			Descricao = descricao;
         }
 
 		public static string ToTitleCase( string title )
