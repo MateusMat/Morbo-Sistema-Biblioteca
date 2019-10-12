@@ -101,7 +101,7 @@ namespace Forma_Alunos
 		{
 			int quantia = Int32.Parse (QuantidadeTextBox.Text);
 
-			string codigo = conector.inserirLivroNovo (ISBNtextBox.Text, TituloTextBox.Text.ToLower(), AutorTextBox.Text.ToLower(), EditoraTextBox.Text.ToLower (), IdiomaTextBox.Text.ToLower (), EdicaoTextBox.Text, AnoTextBox.Text);
+			string codigo = conector.inserirLivroNovo (ISBNtextBox.Text, TituloTextBox.Text.ToLower(), AutorTextBox.Text.ToLower(), EditoraTextBox.Text.ToLower (), IdiomaTextBox.Text.ToLower (), EdicaoTextBox.Text, AnoTextBox.Text, DescricaoTextBox.Text);
 
 			if (quantia > 1)
 			{

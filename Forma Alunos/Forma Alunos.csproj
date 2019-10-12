@@ -59,36 +59,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aluno.cs" />
-    <Compile Include="Cadastro_Livro.cs">
+    <Compile Include="Componentes_Interface\Cadastro_Livro.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Cadastro_Livro.Designer.cs">
+    <Compile Include="Componentes_Interface\Cadastro_Livro.Designer.cs">
       <DependentUpon>Cadastro_Livro.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cadastro_Usuario.cs">
+    <Compile Include="Componentes_Interface\Cadastro_Usuario.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Cadastro_Usuario.Designer.cs">
+    <Compile Include="Componentes_Interface\Cadastro_Usuario.Designer.cs">
       <DependentUpon>Cadastro_Usuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Editar_Livro.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editar_Livro.Designer.cs">
       <DependentUpon>Editar_Livro.cs</DependentUpon>
     </Compile>
     <Compile Include="Livros.cs" />
     <Compile Include="MySQL_Conector.cs" />
-    <Compile Include="PesquisaEdicao_Livro.cs">
+    <Compile Include="Componentes_Interface\Pesquisa_Livro.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PesquisaEdicao_Livro.Designer.cs">
-      <DependentUpon>PesquisaEdicao_Livro.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pesquisa_Livro.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pesquisa_Livro.Designer.cs">
+    <Compile Include="Componentes_Interface\Pesquisa_Livro.Designer.cs">
       <DependentUpon>Pesquisa_Livro.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
@@ -99,20 +93,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Cadastro_Livro.resx">
+    <EmbeddedResource Include="Componentes_Interface\Cadastro_Livro.resx">
       <DependentUpon>Cadastro_Livro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Cadastro_Usuario.resx">
+    <EmbeddedResource Include="Componentes_Interface\Cadastro_Usuario.resx">
       <DependentUpon>Cadastro_Usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Componentes_Interface\Pesquisa_Livro.resx">
+      <DependentUpon>Pesquisa_Livro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editar_Livro.resx">
       <DependentUpon>Editar_Livro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PesquisaEdicao_Livro.resx">
-      <DependentUpon>PesquisaEdicao_Livro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pesquisa_Livro.resx">
-      <DependentUpon>Pesquisa_Livro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>

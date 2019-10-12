@@ -153,7 +153,7 @@
 		private System.Windows.Forms.Label buscaLabel;
 		private System.Windows.Forms.Button botaoBuscar;
 		private System.Windows.Forms.ComboBox modoPesquisaSQL;
-		private System.Windows.Forms.Button botaoEditar;
+		public System.Windows.Forms.Button botaoEditar;
 		private System.Windows.Forms.Button botaoEmprestar;
 	}
 }

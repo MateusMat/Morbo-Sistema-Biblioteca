@@ -115,7 +115,7 @@ namespace Forma_Alunos
             }
         }
 
-		public string inserirLivroNovo(string ISBN, string titulo, string autor, string editora, string idioma, string edicao, string ano )
+		public string inserirLivroNovo(string ISBN, string titulo, string autor, string editora, string idioma, string edicao, string ano, string descricao )
 		{
 			string codigo = "";
 
@@ -128,7 +128,7 @@ namespace Forma_Alunos
 			}
 
 			string comando = "select biblioteca.inserir_Livro(" + ISBN + ", '" + codigo + " 001', '" + titulo + "', '"
-							+ autor + "', '" + editora + "', '" + idioma + "', " + edicao + ", " + ano + ")";
+							+ autor + "', '" + editora + "', '" + idioma + "', " + edicao + ", " + ano + ", '" + descricao + "')";
 
 			//open connection
 			if ( this.OpenConnection () == true )
@@ -175,6 +175,91 @@ namespace Forma_Alunos
 			}
 		}
 
+		public void editarLivro( string ISBN, string titulo, string idioma, string edicao, string ano, string destricao )
+		{
+			string comando =	"UPDATE biblioteca.livro " + 
+								"SET " + 
+								"	titulo = '" + titulo + "', " +
+								"	idioma = '" + idioma + "', " +
+								"	edicao = '" + edicao + "', " +
+								"	ano = '" + ano + "', " +
+								"	descricao = '" + destricao +"' " +
+								"WHERE ISBN = '" + ISBN +"';";
+
+			//open connection
+			if ( this.OpenConnection () == true )
+			{
+				//create command and assign the query and connection from the constructor
+				MySqlCommand cmd = new MySqlCommand (comando, connection);
+
+				//Execute command
+				cmd.ExecuteNonQuery ();
+
+				//close connection
+				this.CloseConnection ();
+			}
+		}
+
+		public List<Livros> Pesquisa_Livro( string busca, int tipo )
+		{
+			string comando = "SELECT ISBN, titulo, autor.nome as autorNome, editora.nome as editoraNome, idioma, edicao, ano , descricao FROM livro " +
+							 "INNER JOIN autor ON (livro.idAutor = autor.idAutor) INNER JOIN editora ON (livro.idEditora = editora.idEditora) ";
+
+			switch ( tipo )
+			{
+				case 0:
+					comando += "WHERE livro.titulo LIKE '%" + busca + "%'";
+					break;
+				case 1:
+					comando += "WHERE livro.idAutor IN (SELECT autor.idAutor FROM autor WHERE nome LIKE '%" + busca + "%')";
+					break;
+				case 2:
+					comando += "WHERE livro.ISBN LIKE '" + busca + "'";
+					break;
+				case 3:
+					comando += "WHERE (livro.titulo LIKE '%" + busca + "%' OR livro.idAutor IN (SELECT autor.idAutor FROM autor WHERE nome LIKE '%" + busca + "%') OR livro.ISBN LIKE '" + busca + "')";
+					break;
+				default:
+					return null;
+			}
+
+			//Create a list to store the result
+			List<Livros> lista = new List<Livros> ();
+
+			//Open connection
+			if ( this.OpenConnection () == true )
+			{
+				//Create Command
+				MySqlCommand cmd = new MySqlCommand (comando, connection);
+				//Create a data reader and Execute the command
+				MySqlDataReader dataReader = cmd.ExecuteReader ();
+
+
+				while ( dataReader.Read () )
+				{
+					lista.Add (new Livros ("" + dataReader["ISBN"],
+										 "" + dataReader["titulo"],
+										 "" + dataReader["autorNome"],
+										 "" + dataReader["editoraNome"],
+										 "" + dataReader["idioma"],
+										 "" + dataReader["edicao"],
+										 "" + dataReader["ano"],
+										 "" + dataReader["descricao"]));
+				}
+
+				//close Data Reader
+				dataReader.Close ();
+
+				//close Connection
+				this.CloseConnection ();
+			}
+
+			return lista;
+		}
+
+
+
+
 		public void cadastrarUsuario (string nome, string email, string cpf, string endereco)
 		{
 			string comando = "INSERT INTO usuario(nome, email, CPF, endereco) VALUES ('" + nome + "', '" + email + "', '" + cpf +"', '" + endereco +"' )";
@@ -189,61 +274,5 @@ namespace Forma_Alunos
 
 
 
-        public List<Livros> Pesquisa_Livro(string busca, int tipo)
-        {
-            string comando = "SELECT ISBN, titulo, autor.nome as autorNome, editora.nome as editoraNome, idioma, edicao, ano , descricao FROM livro " +
-							 "INNER JOIN autor ON (livro.idAutor = autor.idAutor) INNER JOIN editora ON (livro.idEditora = editora.idEditora) ";
-
-            switch (tipo)
-            {
-                case 0:
-                    comando +=	"WHERE livro.titulo LIKE '%" + busca + "%'";
-					break;
-				case 1:
-					comando +=	"WHERE livro.idAutor IN (SELECT autor.idAutor FROM autor WHERE nome LIKE '%" + busca + "%')";
-					break;
-				case 2:
-					comando += "WHERE livro.ISBN LIKE '"+ busca + "'";
-					break;
-				case 3:
-					comando += "WHERE (livro.titulo LIKE '%" + busca + "%' OR livro.idAutor IN (SELECT autor.idAutor FROM autor WHERE nome LIKE '%" + busca + "%') OR livro.ISBN LIKE '" + busca + "')";
-					break;
-				default:
-					return null;
-            }
-            
-            //Create a list to store the result
-            List<Livros> lista = new List<Livros> ();
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(comando, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
-
-                while (dataReader.Read())
-                {
-                    lista.Add(new Livros("" + dataReader["ISBN"],
-										 "" + dataReader["titulo"],
-										 "" + dataReader["autorNome"],
-										 "" + dataReader["editoraNome"],
-										 "" + dataReader["idioma"],
-										 "" + dataReader["edicao"],
-										 "" + dataReader["ano"],
-										 "" + dataReader["descricao"]));
-                }
-
-                    //close Data Reader
-                    dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
-            }
-
-			return lista;
-		}
     }
 }

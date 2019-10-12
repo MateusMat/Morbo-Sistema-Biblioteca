@@ -12,6 +12,8 @@ namespace Forma_Alunos
 {
 	public partial class Pesquisa_Livro : UserControl
 	{
+		//public Livros livro { set; get; }
+
 		private List<Livros> listaLivroSQL = null;
 		private MySQL_Conector conector;
 
@@ -41,7 +43,8 @@ namespace Forma_Alunos
 
 		private void botaoEditar_Click( object sender, EventArgs e )
 		{
-			//Editar_Livro (listaLivroSQL[displayLivros.SelectedIndex]);
+			Editar_Livro janela = new Editar_Livro (listaLivroSQL[displayLivros.SelectedIndex]);
+			janela.Show ();
 		}
 	}
 }
