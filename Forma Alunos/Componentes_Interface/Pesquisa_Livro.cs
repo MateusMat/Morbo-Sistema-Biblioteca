@@ -12,8 +12,6 @@ namespace Forma_Alunos
 {
 	public partial class Pesquisa_Livro : UserControl
 	{
-		//public Livros livro { set; get; }
-
 		private List<Livros> listaLivroSQL = null;
 		private MySQL_Conector conector;
 
@@ -26,7 +24,7 @@ namespace Forma_Alunos
 
 		private void botaoBuscar_Click( object sender, EventArgs e )
 		{
-			listaLivroSQL = conector.Pesquisa_Livro (buscaTextBox.Text.ToLower (), modoPesquisaSQL.SelectedIndex);
+			listaLivroSQL = conector.Pesquisa_Multi_Livros (buscaTextBox.Text.ToLower (), modoPesquisaSQL.SelectedIndex);
 			update_dislayLivros ();
 		}
 

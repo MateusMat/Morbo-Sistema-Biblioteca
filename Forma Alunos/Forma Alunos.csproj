@@ -59,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aluno.cs" />
+    <Compile Include="Boleto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boleto.Designer.cs">
+      <DependentUpon>Boleto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Componentes_Interface\Cadastro_Livro.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -70,6 +76,30 @@
     </Compile>
     <Compile Include="Componentes_Interface\Cadastro_Usuario.Designer.cs">
       <DependentUpon>Cadastro_Usuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Componentes_Interface\Devolver_Livro.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Componentes_Interface\Devolver_Livro.Designer.cs">
+      <DependentUpon>Devolver_Livro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Componentes_Interface\Emprestar_Livro.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Componentes_Interface\Emprestar_Livro.Designer.cs">
+      <DependentUpon>Emprestar_Livro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Componentes_Interface\Pesquisa_Usuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Componentes_Interface\Pesquisa_Usuario.Designer.cs">
+      <DependentUpon>Pesquisa_Usuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dados_Aluno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dados_Aluno.Designer.cs">
+      <DependentUpon>Dados_Aluno.cs</DependentUpon>
     </Compile>
     <Compile Include="Editar_Livro.cs">
       <SubType>Form</SubType>
@@ -93,14 +123,29 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Boleto.resx">
+      <DependentUpon>Boleto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Componentes_Interface\Cadastro_Livro.resx">
       <DependentUpon>Cadastro_Livro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Componentes_Interface\Cadastro_Usuario.resx">
       <DependentUpon>Cadastro_Usuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Componentes_Interface\Devolver_Livro.resx">
+      <DependentUpon>Devolver_Livro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Componentes_Interface\Emprestar_Livro.resx">
+      <DependentUpon>Emprestar_Livro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Componentes_Interface\Pesquisa_Livro.resx">
       <DependentUpon>Pesquisa_Livro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Componentes_Interface\Pesquisa_Usuario.resx">
+      <DependentUpon>Pesquisa_Usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dados_Aluno.resx">
+      <DependentUpon>Dados_Aluno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editar_Livro.resx">
       <DependentUpon>Editar_Livro.cs</DependentUpon>
@@ -131,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boletobancario[1].jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

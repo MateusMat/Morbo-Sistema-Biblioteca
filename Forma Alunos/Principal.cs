@@ -27,6 +27,9 @@ namespace Forma_Alunos
 			cadastro_Livro.Show ();
 			pesquisa_Livro.Hide ();
 			cadastro_Usuario.Hide ();
+			emprestar_Livro.Hide ();
+			pesquisa_Usuario.Hide ();
+			devolver_Livro.Hide ();
 		}
 
 		private void botao_cadastrarUsuario_Click( object sender, EventArgs e )
@@ -34,6 +37,9 @@ namespace Forma_Alunos
 			cadastro_Livro.Hide ();
 			cadastro_Usuario.Show ();
 			pesquisa_Livro.Hide ();
+			emprestar_Livro.Hide ();
+			pesquisa_Usuario.Hide ();
+			devolver_Livro.Hide ();
 		}
 
 		private void botao_pesquisarLivro_Click( object sender, EventArgs e )
@@ -41,6 +47,39 @@ namespace Forma_Alunos
 			cadastro_Livro.Hide ();
 			cadastro_Usuario.Hide ();
 			pesquisa_Livro.Show ();
+			emprestar_Livro.Hide ();
+			pesquisa_Usuario.Hide ();
+			devolver_Livro.Hide ();
+		}
+
+		private void botao_EmprestarLivro_Click( object sender, EventArgs e )
+		{
+			cadastro_Livro.Hide ();
+			pesquisa_Livro.Hide ();
+			cadastro_Usuario.Hide ();
+			emprestar_Livro.Show ();
+			pesquisa_Usuario.Hide ();
+			devolver_Livro.Hide ();
+		}
+
+		private void button1_Click( object sender, EventArgs e )
+		{
+			cadastro_Livro.Hide ();
+			pesquisa_Livro.Hide ();
+			cadastro_Usuario.Hide ();
+			emprestar_Livro.Hide ();
+			pesquisa_Usuario.Show ();
+			devolver_Livro.Hide ();
+		}
+
+		private void botao_DevolverLivro_Click( object sender, EventArgs e )
+		{
+			cadastro_Livro.Hide ();
+			pesquisa_Livro.Hide ();
+			cadastro_Usuario.Hide ();
+			emprestar_Livro.Hide ();
+			pesquisa_Usuario.Hide ();
+			devolver_Livro.Show ();
 		}
 	}
 }

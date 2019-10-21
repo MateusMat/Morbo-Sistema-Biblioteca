@@ -96,25 +96,6 @@ namespace Forma_Alunos
             }
         }
 
-        public void inserirLivro(string titulo, string autor, string editora, string edicao, string ano)
-        {
-            string query = "select biblioteca.inserir_Livro('" + titulo + "', '"
-                            + autor + "', '" + editora + "', " + edicao + ", " + ano + ")";
-
-            //open connection
-            if (this.OpenConnection() == true)
-            {
-                //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                //Execute command
-                cmd.ExecuteNonQuery();
-
-                //close connection
-                this.CloseConnection();
-            }
-        }
-
 		public string inserirLivroNovo(string ISBN, string titulo, string autor, string editora, string idioma, string edicao, string ano, string descricao )
 		{
 			string codigo = "";
@@ -127,7 +108,7 @@ namespace Forma_Alunos
 				codigo += (char) temp;
 			}
 
-			string comando = "select biblioteca.inserir_Livro(" + ISBN + ", '" + codigo + " 001', '" + titulo + "', '"
+			string comando = "SELECT biblioteca.inserir_Livro(" + ISBN + ", '" + codigo + "', '" + titulo + "', '"
 							+ autor + "', '" + editora + "', '" + idioma + "', " + edicao + ", " + ano + ", '" + descricao + "')";
 
 			//open connection
@@ -167,7 +148,7 @@ namespace Forma_Alunos
 			{
 				for ( int i = count; i < quantia + count; i++ )
 				{
-					comando = "INSERT INTO livro_objeto(idLivro, isbn) values ('" + codigo + " " + i.ToString("D3") + "', '" + ISBN + "')";
+					comando = "INSERT INTO livro_objeto(idLivro, isbn) values ('" + codigo + i.ToString("D3") + "', '" + ISBN + "')";
 					cmd = new MySqlCommand (comando, connection);
 					cmd.ExecuteNonQuery ();
 				}
@@ -200,9 +181,9 @@ namespace Forma_Alunos
 			}
 		}
 
-		public List<Livros> Pesquisa_Livro( string busca, int tipo )
+		public List<Livros> Pesquisa_Multi_Livros( string busca, int tipo )
 		{
-			string comando = "SELECT ISBN, titulo, autor.nome as autorNome, editora.nome as editoraNome, idioma, edicao, ano , descricao FROM livro " +
+			string comando = "SELECT ISBN, titulo, codigo, autor.nome as autorNome, editora.nome as editoraNome, idioma, edicao, ano , descricao FROM livro " +
 							 "INNER JOIN autor ON (livro.idAutor = autor.idAutor) INNER JOIN editora ON (livro.idEditora = editora.idEditora) ";
 
 			switch ( tipo )
@@ -238,13 +219,14 @@ namespace Forma_Alunos
 				while ( dataReader.Read () )
 				{
 					lista.Add (new Livros ("" + dataReader["ISBN"],
-										 "" + dataReader["titulo"],
-										 "" + dataReader["autorNome"],
-										 "" + dataReader["editoraNome"],
-										 "" + dataReader["idioma"],
-										 "" + dataReader["edicao"],
-										 "" + dataReader["ano"],
-										 "" + dataReader["descricao"]));
+									   	   "" + dataReader["codigo"],
+										   "" + dataReader["titulo"],
+										   "" + dataReader["autorNome"],
+										   "" + dataReader["editoraNome"],
+										   "" + dataReader["idioma"],
+										   "" + dataReader["edicao"],
+										   "" + dataReader["ano"],
+										   "" + dataReader["descricao"]));
 				}
 
 				//close Data Reader
@@ -257,7 +239,122 @@ namespace Forma_Alunos
 			return lista;
 		}
 
+		public Livros Pesquisa_unico_Livro( string busca, int tipo )
+		{
+			string comando = "SELECT ISBN, titulo, codigo, autor.nome as autorNome, editora.nome as editoraNome, idioma, edicao, ano , descricao FROM livro " +
+							 "INNER JOIN autor ON (livro.idAutor = autor.idAutor) INNER JOIN editora ON (livro.idEditora = editora.idEditora) ";
 
+			switch ( tipo )
+			{
+				case 0:
+					comando += "WHERE livro.ISBN LIKE '" + busca + "'";
+					break;
+				case 1:
+					comando += "WHERE livro.codigo LIKE '" + busca + "'";
+					break;
+				default:
+					return null;
+			}
+
+			//Create a list to store the result
+			Livros livro = null;
+
+			//Open connection
+			if ( this.OpenConnection () == true )
+			{
+				//Create Command
+				MySqlCommand cmd = new MySqlCommand (comando, connection);
+				//Create a data reader and Execute the command
+				MySqlDataReader dataReader = cmd.ExecuteReader ();
+
+
+				while ( dataReader.Read () )
+				{
+					livro = new Livros ("" + dataReader["ISBN"],
+										"" + dataReader["codigo"],
+										"" + dataReader["titulo"],
+										"" + dataReader["autorNome"],
+										"" + dataReader["editoraNome"],
+										"" + dataReader["idioma"],
+										"" + dataReader["edicao"],
+										"" + dataReader["ano"],
+										"" + dataReader["descricao"]);
+				}
+
+				//close Data Reader
+				dataReader.Close ();
+
+				//close Connection
+				this.CloseConnection ();
+			}
+
+			comando = "SELECT count(*) as quantia FROM livro_objeto WHERE idlivro LIKE '" + livro.Codigo + "%'";
+
+			//Open connection
+			if ( this.OpenConnection () == true )
+			{
+				//Create Command
+				MySqlCommand cmd = new MySqlCommand (comando, connection);
+				//Create a data reader and Execute the command
+				MySqlDataReader dataReader = cmd.ExecuteReader ();
+
+
+				while ( dataReader.Read () )
+				{
+					livro.Numero_Exemplares = Int32.Parse("" + dataReader["quantia"]);
+				}
+
+				//close Data Reader
+				dataReader.Close ();
+
+				//close Connection
+				this.CloseConnection ();
+			}
+
+			return livro;
+		}
+
+		public int emprestarLivro(string idAluno, string codigo )
+		{
+			string comando = "SELECT biblioteca.emprestar_Livro(" + idAluno + ", '" + codigo + "')";
+
+			int temp = 0;
+
+			//open connection
+			if ( this.OpenConnection () == true )
+			{
+				//create command and assign the query and connection from the constructor
+				MySqlCommand cmd = new MySqlCommand (comando, connection);
+
+				//Execute command
+				temp = cmd.ExecuteNonQuery ();
+
+				//close connection
+				this.CloseConnection ();
+			}
+
+			MessageBox.Show (temp.ToString());
+
+			return temp;
+		}
+
+		public void devolverLivro( string codigo )
+		{
+			string comando = "SELECT biblioteca.devolver_Livro('" + codigo + "')";
+
+			//open connection
+			if ( this.OpenConnection () == true )
+			{
+				//create command and assign the query and connection from the constructor
+				MySqlCommand cmd = new MySqlCommand (comando, connection);
+
+				//Execute command
+				cmd.ExecuteNonQuery ();
+
+				//close connection
+				this.CloseConnection ();
+			}
+		}
 
 
 		public void cadastrarUsuario (string nome, string email, string cpf, string endereco)
@@ -272,7 +369,57 @@ namespace Forma_Alunos
 			}
 		}
 
+		public List<Aluno> Pesquisa_Aluno( string busca, int tipo )
+		{
+			string comando = "SELECT * FROM biblioteca.usuario ";
+
+			switch ( tipo )
+			{
+				case 0:
+					comando += "WHERE nome like '%" + busca + "%'";
+					break;
+				case 1:
+					comando += "WHERE idUsuario like '" + busca + "'";
+					break;
+				case 2:
+					comando += "WHERE CPF like '" + busca + "'";
+					break;
+				default:
+					return null;
+			}
+
+			//Create a list to store the result
+			List<Aluno> lista = new List<Aluno> ();
+
+			//Open connection
+			if ( this.OpenConnection () == true )
+			{
+				//Create Command
+				MySqlCommand cmd = new MySqlCommand (comando, connection);
+				//Create a data reader and Execute the command
+				MySqlDataReader dataReader = cmd.ExecuteReader ();
 
 
-    }
+				while ( dataReader.Read () )
+				{
+					lista.Add (new Aluno ("" + dataReader["idUsuario"],
+										  "" + dataReader["nome"],
+										  "" + dataReader["CPF"],
+										  "" + dataReader["email"],
+										  "" + dataReader["endereco"],
+										  "" + dataReader["multaTotal"],
+										  "" + dataReader["status"]));
+				}
+
+				//close Data Reader
+				dataReader.Close ();
+
+				//close Connection
+				this.CloseConnection ();
+			}
+
+			return lista;
+		}
+
+	}
 }

@@ -53,14 +53,52 @@ namespace Forma_Alunos
 		{
 			if(ISBNtextBox.Text.Length == 10 || ISBNtextBox.Text.Length == 13 )
 			{
-				TituloTextBox.Enabled = true;
-				AutorTextBox.Enabled = true;
-				EditoraTextBox.Enabled = true;
-				EdicaoTextBox.Enabled = true;
-				IdiomaTextBox.Enabled = true;
-				AnoTextBox.Enabled = true;
+				Livros livroTemp = conector.Pesquisa_unico_Livro (ISBNtextBox.Text, 0);
+
+				if(livroTemp == null)
+				{
+					QuantidadeTextBox.Enabled = true;
+					TituloTextBox.Enabled = true;
+					AutorTextBox.Enabled = true;
+					EditoraTextBox.Enabled = true;
+					EdicaoTextBox.Enabled = true;
+					IdiomaTextBox.Enabled = true;
+					AnoTextBox.Enabled = true;
+					DescricaoTextBox.Enabled = true;
+				}
+				else
+				{
+					QuantidadeTextBox.Text = livroTemp.Numero_Exemplares.ToString();
+					TituloTextBox.Text = livroTemp.Titulo ;
+					AutorTextBox.Text = livroTemp.Autor ;
+					EditoraTextBox.Text = livroTemp.Editora ;
+					EdicaoTextBox.Text = livroTemp.Edicao ;
+					IdiomaTextBox.Text = livroTemp.Idioma ;
+					AnoTextBox.Text = livroTemp.Ano ;
+					DescricaoTextBox.Text = livroTemp.Descricao ;
+				}
 				AssuntoTextBox.Enabled = true;
-				DescricaoTextBox.Enabled = true;
+			}
+			else
+			{
+				QuantidadeTextBox.Enabled = false;
+				TituloTextBox.Enabled = false;
+				AutorTextBox.Enabled = false;
+				EditoraTextBox.Enabled = false;
+				EdicaoTextBox.Enabled = false;
+				IdiomaTextBox.Enabled = false;
+				AnoTextBox.Enabled = false;
+				AssuntoTextBox.Enabled = false;
+				DescricaoTextBox.Enabled = false;
+
+				QuantidadeTextBox.Text = "";
+				TituloTextBox.Text = "";
+				AutorTextBox.Text = "";
+				EditoraTextBox.Text = "";
+				EdicaoTextBox.Text = "";
+				IdiomaTextBox.Text = "";
+				AnoTextBox.Text = "";
+				DescricaoTextBox.Text = "";
 			}
 
 			string temp = "";
@@ -107,6 +145,17 @@ namespace Forma_Alunos
 			{
 				conector.inserirLivroExistente (ISBNtextBox.Text, codigo, quantia - 1);
 			}
+
+			string mensagem = "Código dos livros cadastrados:\n";
+
+			for (int i = 1; i <= quantia; i++)
+			{
+				mensagem += codigo + "" + i.ToString ("D3") + "\n";
+			}
+
+			mensagem += "\n Desejá imprimir Códigos de Barras?";
+
+			MessageBox.Show (mensagem, "Imprimir Códigos de Barras", MessageBoxButtons.YesNo);
 		}
 	}
 }

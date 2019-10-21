@@ -241,6 +241,7 @@
 			// QuantidadeTextBox
 			// 
 			this.QuantidadeTextBox.DetectUrls = false;
+			this.QuantidadeTextBox.Enabled = false;
 			this.QuantidadeTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.QuantidadeTextBox.Location = new System.Drawing.Point(492, 24);
 			this.QuantidadeTextBox.MaxLength = 2;

@@ -50,6 +50,7 @@
 			this.displayLivros.Name = "displayLivros";
 			this.displayLivros.Size = new System.Drawing.Size(516, 340);
 			this.displayLivros.TabIndex = 106;
+			this.displayLivros.DoubleClick += new System.EventHandler(this.botaoEditar_Click);
 			// 
 			// buscaTextBox
 			// 

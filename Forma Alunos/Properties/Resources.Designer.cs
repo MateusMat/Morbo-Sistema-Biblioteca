@@ -59,5 +59,15 @@ namespace Forma_Alunos.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap boletobancario_1_ {
+            get {
+                object obj = ResourceManager.GetObject("boletobancario[1]", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -37,12 +37,18 @@
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.button1 = new System.Windows.Forms.Button();
+			this.botao_EmprestarLivro = new System.Windows.Forms.Button();
+			this.botao_pesquisarLivro = new System.Windows.Forms.Button();
 			this.botao_cadastrarUsuario = new System.Windows.Forms.Button();
 			this.botao_cadastrarLivro = new System.Windows.Forms.Button();
-			this.botao_pesquisarLivro = new System.Windows.Forms.Button();
-			this.cadastro_Usuario = new Forma_Alunos.Cadastro_Usuario();
+			this.pesquisa_Usuario = new Forma_Alunos.Componentes_Interface.Pesquisa_Usuario();
+			this.emprestar_Livro = new Forma_Alunos.Componentes_Interface.Emprestar_Livro();
 			this.pesquisa_Livro = new Forma_Alunos.Pesquisa_Livro();
 			this.cadastro_Livro = new Forma_Alunos.Cadastro_Livro();
+			this.cadastro_Usuario = new Forma_Alunos.Cadastro_Usuario();
+			this.devolver_Livro = new Forma_Alunos.Componentes_Interface.Devolver_Livro();
+			this.botao_DevolverLivro = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -111,12 +117,18 @@
 			// 
 			// splitContainer1.Panel1
 			// 
+			this.splitContainer1.Panel1.Controls.Add(this.botao_DevolverLivro);
+			this.splitContainer1.Panel1.Controls.Add(this.button1);
+			this.splitContainer1.Panel1.Controls.Add(this.botao_EmprestarLivro);
 			this.splitContainer1.Panel1.Controls.Add(this.botao_pesquisarLivro);
 			this.splitContainer1.Panel1.Controls.Add(this.botao_cadastrarUsuario);
 			this.splitContainer1.Panel1.Controls.Add(this.botao_cadastrarLivro);
 			// 
 			// splitContainer1.Panel2
 			// 
+			this.splitContainer1.Panel2.Controls.Add(this.devolver_Livro);
+			this.splitContainer1.Panel2.Controls.Add(this.pesquisa_Usuario);
+			this.splitContainer1.Panel2.Controls.Add(this.emprestar_Livro);
 			this.splitContainer1.Panel2.Controls.Add(this.pesquisa_Livro);
 			this.splitContainer1.Panel2.Controls.Add(this.cadastro_Livro);
 			this.splitContainer1.Panel2.Controls.Add(this.cadastro_Usuario);
@@ -124,13 +136,43 @@
 			this.splitContainer1.SplitterDistance = 355;
 			this.splitContainer1.TabIndex = 8;
 			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(184, 136);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(160, 32);
+			this.button1.TabIndex = 4;
+			this.button1.Text = "Pesquisar Aluno";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
+			// botao_EmprestarLivro
+			// 
+			this.botao_EmprestarLivro.Location = new System.Drawing.Point(8, 56);
+			this.botao_EmprestarLivro.Name = "botao_EmprestarLivro";
+			this.botao_EmprestarLivro.Size = new System.Drawing.Size(160, 32);
+			this.botao_EmprestarLivro.TabIndex = 3;
+			this.botao_EmprestarLivro.Text = "Emprestar Livro";
+			this.botao_EmprestarLivro.UseVisualStyleBackColor = true;
+			this.botao_EmprestarLivro.Click += new System.EventHandler(this.botao_EmprestarLivro_Click);
+			// 
+			// botao_pesquisarLivro
+			// 
+			this.botao_pesquisarLivro.Location = new System.Drawing.Point(184, 16);
+			this.botao_pesquisarLivro.Name = "botao_pesquisarLivro";
+			this.botao_pesquisarLivro.Size = new System.Drawing.Size(160, 32);
+			this.botao_pesquisarLivro.TabIndex = 2;
+			this.botao_pesquisarLivro.Text = "Pesquisar Livro";
+			this.botao_pesquisarLivro.UseVisualStyleBackColor = true;
+			this.botao_pesquisarLivro.Click += new System.EventHandler(this.botao_pesquisarLivro_Click);
+			// 
 			// botao_cadastrarUsuario
 			// 
-			this.botao_cadastrarUsuario.Location = new System.Drawing.Point(8, 56);
+			this.botao_cadastrarUsuario.Location = new System.Drawing.Point(8, 136);
 			this.botao_cadastrarUsuario.Name = "botao_cadastrarUsuario";
 			this.botao_cadastrarUsuario.Size = new System.Drawing.Size(160, 32);
 			this.botao_cadastrarUsuario.TabIndex = 1;
-			this.botao_cadastrarUsuario.Text = "Cadastrar Usuario";
+			this.botao_cadastrarUsuario.Text = "Cadastrar Aluno";
 			this.botao_cadastrarUsuario.UseVisualStyleBackColor = true;
 			this.botao_cadastrarUsuario.Click += new System.EventHandler(this.botao_cadastrarUsuario_Click);
 			// 
@@ -144,25 +186,25 @@
 			this.botao_cadastrarLivro.UseVisualStyleBackColor = true;
 			this.botao_cadastrarLivro.Click += new System.EventHandler(this.botao_cadastrarLivro_Click);
 			// 
-			// botao_pesquisarLivro
+			// pesquisa_Usuario
 			// 
-			this.botao_pesquisarLivro.Location = new System.Drawing.Point(184, 16);
-			this.botao_pesquisarLivro.Name = "botao_pesquisarLivro";
-			this.botao_pesquisarLivro.Size = new System.Drawing.Size(160, 32);
-			this.botao_pesquisarLivro.TabIndex = 2;
-			this.botao_pesquisarLivro.Text = "Pesquisar Livro";
-			this.botao_pesquisarLivro.UseVisualStyleBackColor = true;
-			this.botao_pesquisarLivro.Click += new System.EventHandler(this.botao_pesquisarLivro_Click);
+			this.pesquisa_Usuario.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.pesquisa_Usuario.Location = new System.Drawing.Point(0, 0);
+			this.pesquisa_Usuario.Margin = new System.Windows.Forms.Padding(4);
+			this.pesquisa_Usuario.Name = "pesquisa_Usuario";
+			this.pesquisa_Usuario.Size = new System.Drawing.Size(640, 480);
+			this.pesquisa_Usuario.TabIndex = 4;
+			this.pesquisa_Usuario.Visible = false;
 			// 
-			// cadastro_Usuario
+			// emprestar_Livro
 			// 
-			this.cadastro_Usuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-			this.cadastro_Usuario.Location = new System.Drawing.Point(0, 0);
-			this.cadastro_Usuario.Margin = new System.Windows.Forms.Padding(4);
-			this.cadastro_Usuario.Name = "cadastro_Usuario";
-			this.cadastro_Usuario.Size = new System.Drawing.Size(640, 480);
-			this.cadastro_Usuario.TabIndex = 1;
-			this.cadastro_Usuario.Visible = false;
+			this.emprestar_Livro.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.emprestar_Livro.Location = new System.Drawing.Point(0, 0);
+			this.emprestar_Livro.Margin = new System.Windows.Forms.Padding(4);
+			this.emprestar_Livro.Name = "emprestar_Livro";
+			this.emprestar_Livro.Size = new System.Drawing.Size(640, 480);
+			this.emprestar_Livro.TabIndex = 3;
+			this.emprestar_Livro.Visible = false;
 			// 
 			// pesquisa_Livro
 			// 
@@ -183,6 +225,36 @@
 			this.cadastro_Livro.Size = new System.Drawing.Size(640, 400);
 			this.cadastro_Livro.TabIndex = 0;
 			this.cadastro_Livro.Visible = false;
+			// 
+			// cadastro_Usuario
+			// 
+			this.cadastro_Usuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.cadastro_Usuario.Location = new System.Drawing.Point(0, 0);
+			this.cadastro_Usuario.Margin = new System.Windows.Forms.Padding(4);
+			this.cadastro_Usuario.Name = "cadastro_Usuario";
+			this.cadastro_Usuario.Size = new System.Drawing.Size(640, 480);
+			this.cadastro_Usuario.TabIndex = 1;
+			this.cadastro_Usuario.Visible = false;
+			// 
+			// devolver_Livro
+			// 
+			this.devolver_Livro.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.devolver_Livro.Location = new System.Drawing.Point(0, 0);
+			this.devolver_Livro.Margin = new System.Windows.Forms.Padding(4);
+			this.devolver_Livro.Name = "devolver_Livro";
+			this.devolver_Livro.Size = new System.Drawing.Size(640, 480);
+			this.devolver_Livro.TabIndex = 5;
+			this.devolver_Livro.Visible = false;
+			// 
+			// botao_DevolverLivro
+			// 
+			this.botao_DevolverLivro.Location = new System.Drawing.Point(184, 56);
+			this.botao_DevolverLivro.Name = "botao_DevolverLivro";
+			this.botao_DevolverLivro.Size = new System.Drawing.Size(160, 32);
+			this.botao_DevolverLivro.TabIndex = 5;
+			this.botao_DevolverLivro.Text = "Devolver Livro";
+			this.botao_DevolverLivro.UseVisualStyleBackColor = true;
+			this.botao_DevolverLivro.Click += new System.EventHandler(this.botao_DevolverLivro_Click);
 			// 
 			// Principal
 			// 
@@ -222,6 +294,12 @@
 		private Cadastro_Usuario cadastro_Usuario;
 		private System.Windows.Forms.Button botao_pesquisarLivro;
 		private Pesquisa_Livro pesquisa_Livro;
+		private System.Windows.Forms.Button botao_EmprestarLivro;
+		private Componentes_Interface.Emprestar_Livro emprestar_Livro;
+		private System.Windows.Forms.Button button1;
+		private Componentes_Interface.Pesquisa_Usuario pesquisa_Usuario;
+		private System.Windows.Forms.Button botao_DevolverLivro;
+		private Componentes_Interface.Devolver_Livro devolver_Livro;
 	}
 }
 

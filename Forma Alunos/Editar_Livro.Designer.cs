@@ -48,6 +48,8 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.BotaoCancelar = new System.Windows.Forms.Button();
+			this.CodigoTextBox = new System.Windows.Forms.RichTextBox();
+			this.label5 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// BotaoCadastrar
@@ -301,11 +303,39 @@
 			this.BotaoCancelar.UseVisualStyleBackColor = true;
 			this.BotaoCancelar.Click += new System.EventHandler(this.BotaoCancelar_Click);
 			// 
+			// CodigoTextBox
+			// 
+			this.CodigoTextBox.DetectUrls = false;
+			this.CodigoTextBox.Enabled = false;
+			this.CodigoTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.CodigoTextBox.Location = new System.Drawing.Point(428, 8);
+			this.CodigoTextBox.MaxLength = 32;
+			this.CodigoTextBox.Multiline = false;
+			this.CodigoTextBox.Name = "CodigoTextBox";
+			this.CodigoTextBox.Size = new System.Drawing.Size(200, 27);
+			this.CodigoTextBox.TabIndex = 168;
+			this.CodigoTextBox.Text = "";
+			// 
+			// label5
+			// 
+			this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.label5.Location = new System.Drawing.Point(316, 12);
+			this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label5.Name = "label5";
+			this.label5.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.label5.Size = new System.Drawing.Size(112, 20);
+			this.label5.TabIndex = 169;
+			this.label5.Text = "Código:";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// Editar_Livro
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(640, 317);
+			this.Controls.Add(this.CodigoTextBox);
+			this.Controls.Add(this.label5);
 			this.Controls.Add(this.BotaoCancelar);
 			this.Controls.Add(this.BotaoCadastrar);
 			this.Controls.Add(this.DescricaoTextBox);
@@ -326,7 +356,7 @@
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "Editar_Livro";
 			this.Text = "Editar_Livro";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Editar_Livro_FormClosing);
@@ -356,5 +386,7 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button BotaoCancelar;
+		private System.Windows.Forms.RichTextBox CodigoTextBox;
+		private System.Windows.Forms.Label label5;
 	}
 }

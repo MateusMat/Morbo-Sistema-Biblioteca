@@ -23,6 +23,7 @@ namespace Forma_Alunos
 			conector = MySQL_Conector.Instance;
 
 			ISBNtextBox.Text = Livro.ISBN;
+			CodigoTextBox.Text = Livro.Codigo;
 			TituloTextBox.Text = Livro.Titulo;
 			AutorTextBox.Text = Livro.Autor;
 			EditoraTextBox.Text = Livro.Editora;
