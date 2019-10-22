@@ -288,28 +288,32 @@ namespace Forma_Alunos
 				this.CloseConnection ();
 			}
 
-			comando = "SELECT count(*) as quantia FROM livro_objeto WHERE idlivro LIKE '" + livro.Codigo + "%'";
-
-			//Open connection
-			if ( this.OpenConnection () == true )
+			if(livro != null)
 			{
-				//Create Command
-				MySqlCommand cmd = new MySqlCommand (comando, connection);
-				//Create a data reader and Execute the command
-				MySqlDataReader dataReader = cmd.ExecuteReader ();
+				comando = "SELECT count(*) as quantia FROM livro_objeto WHERE idlivro LIKE '" + livro.Codigo + "%'";
 
-
-				while ( dataReader.Read () )
+				//Open connection
+				if ( this.OpenConnection () == true )
 				{
-					livro.Numero_Exemplares = Int32.Parse("" + dataReader["quantia"]);
+					//Create Command
+					MySqlCommand cmd = new MySqlCommand (comando, connection);
+					//Create a data reader and Execute the command
+					MySqlDataReader dataReader = cmd.ExecuteReader ();
+
+
+					while ( dataReader.Read () )
+					{
+						livro.Numero_Exemplares = Int32.Parse ("" + dataReader["quantia"]);
+					}
+
+					//close Data Reader
+					dataReader.Close ();
+
+					//close Connection
+					this.CloseConnection ();
 				}
-
-				//close Data Reader
-				dataReader.Close ();
-
-				//close Connection
-				this.CloseConnection ();
 			}
+			
 
 			return livro;
 		}
